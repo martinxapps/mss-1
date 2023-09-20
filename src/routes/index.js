@@ -14,6 +14,7 @@ import Flebotomista from "../views/laboratorio/flebotomista/flebotomista";
 import Imagen from "../views/imagen/imagen";
 import AgendaMV from "../views/imagen/agenda/agendaMV";
 import Calendario from "../views/imagen/agenda/calendario";
+import ConfigAgendaImagen from "../views/imagen/agenda/configAgendas";
 
 // Crear una instancia de la clase
 // const authManager = new AuthManager();
@@ -59,6 +60,7 @@ const Routes = {
   "/step-passport": StepPassport,
   "/imagen": Imagen,
   "/imagen/agendas": AgendaMV,
+  "/imagen/agendas/configuracion": ConfigAgendaImagen,
   "/imagen/agendas/calendario": Calendario,
   "/endoscopia": Imagen,
   "/salir": Salir,
