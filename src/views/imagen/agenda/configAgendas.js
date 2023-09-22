@@ -13,7 +13,8 @@ import ApiHTTP from "../../../models/ApiHTTP";
 class ConfigAgendaImagen extends App {
     usuarios = null;
     dataUser = null;
-    idUsr = null;
+    idAgenda = null;
+    v = null;
     idFiltro = 1;
     constructor(_data) {
         super();
@@ -34,11 +35,18 @@ class ConfigAgendaImagen extends App {
     }
     onupdate(_data) {
 
-        if (_data.attrs.idUsr !== undefined) {
-            this.idUsr = _data.attrs.idUsr;
+        if (_data.attrs.idAgenda !== undefined) {
+            this.idAgenda = _data.attrs.idAgenda;
         } else {
-            this.idUsr = null;
+            this.idAgenda = null;
         }
+
+        if (_data.attrs.view !== undefined) {
+            this.v = _data.attrs.view;
+        } else {
+            this.v = null;
+        }
+
         m.redraw();
     }
     vHeader() {
@@ -80,7 +88,7 @@ class ConfigAgendaImagen extends App {
                             m("div.table-content.col-12.pd-r-0.pd-l-0", [
                                 m("div.d-flex.align-items-center.justify-content-between.mg-t-10", [
                                     m("h5.mg-b-0",
-                                        "Todos las Agendas:",
+                                        "Todas las Agendas:",
                                         m("span.badge.bg-litecoin.tx-white.tx-semibold.pd-l-10.pd-r-10.mg-l-5.tx-14", [
                                             m("i.fas.fa-calendar-day.pd-2"),
                                             " Agendas Disponibles "
@@ -134,11 +142,16 @@ class ConfigAgendaImagen extends App {
                                                 ])
                                             ]),
                                         ]),
-                                        m("span.badge.bg-litecoin.tx-white.tx-semibold.pd-l-10.pd-r-10.mg-l-5.tx-14[role='button']", [
-
-
+                                        m("span.badge.bg-litecoin.tx-white.tx-semibold.pd-l-10.pd-r-10.mg-l-5.tx-14", {
+                                            style: { "cursor": "pointer" },
+                                            onclick: () => {
+                                                m.route.set("/imagen/agendas/configuracion/?view=new");
+                                            }
+                                        }, [
                                             m("i.fas.fa-plus-circle.pd-2"),
                                             " Nueva Agenda ",
+
+
 
                                         ]),
 
@@ -211,8 +224,13 @@ class ConfigAgendaImagen extends App {
                             ]),
                         ),
                         m("li.breadcrumb-item",
-                            m(m.route.Link, { href: "/administracion", }, [
-                                'Administración'
+                            m(m.route.Link, { href: "/imagen", }, [
+                                'Imagen'
+                            ]),
+                        ),
+                        m("li.breadcrumb-item",
+                            m(m.route.Link, { href: "/imagen/agendas", }, [
+                                'Agenda Centralizada'
                             ]),
                         ),
                         m("li.breadcrumb-item.active[aria-current='page']",
@@ -425,7 +443,7 @@ class ConfigAgendaImagen extends App {
 
         if (__this.usuarios !== null && __this.usuarios.status) {
             return __this.usuarios.data.map(function (_val, _i, _contentData) {
-                if (__this.idUsr == _val.samaccountname) {
+                if (__this.idAgenda == _val.samaccountname) {
                     __this.dataUser = _val;
                 }
             })
@@ -601,8 +619,8 @@ class ConfigAgendaImagen extends App {
                                 m('button.btn.btn-sm.btn-block.tx-semibold.tx-white', {
                                     style: { "background-color": "#185b98" },
                                     onclick: () => {
-                                        m.route.set('/administracion/metrovirtual/', {
-                                            idUsr: aData.samaccountname
+                                        m.route.set('/imagen/agendas/configuracion/', {
+                                            idAgenda: aData.samaccountname
                                         });
                                     }
                                 }, 'Ver')
@@ -631,11 +649,13 @@ class ConfigAgendaImagen extends App {
         return [
             this.vHeader(),
             this.vMenu(),
-            (this.idUsr == null ? [
+            (this.idAgenda == null && this.v == null ? [
                 this.vMain()
-            ] : [
+            ] : this.idAgenda !== null && this.v == null ? [
                 this.vMainProfile()
-            ])
+            ] : this.idAgenda == null && this.v !== null ? [
+                this.vMainProfile()
+            ] : [])
         ];
     }
 }

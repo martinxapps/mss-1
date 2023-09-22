@@ -15,6 +15,8 @@ import Imagen from "../views/imagen/imagen";
 import AgendaMV from "../views/imagen/agenda/agendaMV";
 import Calendario from "../views/imagen/agenda/calendario";
 import ConfigAgendaImagen from "../views/imagen/agenda/configAgendas";
+import Endo from "../views/endoscopia/endo";
+import SingOut from "../views/layout/singOut";
 
 // Crear una instancia de la clase
 // const authManager = new AuthManager();
@@ -62,8 +64,10 @@ const Routes = {
   "/imagen/agendas": AgendaMV,
   "/imagen/agendas/configuracion": ConfigAgendaImagen,
   "/imagen/agendas/calendario": Calendario,
-  "/endoscopia": Imagen,
+  "/endoscopia": Endo,
+  "/endoscopia/agendas": Endo,
   "/salir": Salir,
+  "/sing-out": SingOut,
 };
 
 const DefaultRoute = "/";
