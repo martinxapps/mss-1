@@ -17,6 +17,9 @@ import Calendario from "../views/imagen/agenda/calendario";
 import ConfigAgendaImagen from "../views/imagen/agenda/configAgendas";
 import Endo from "../views/endoscopia/endo";
 import SingOut from "../views/layout/singOut";
+import AgendaEndo from "../views/endoscopia/agenda/agendas";
+import ConfigAgEndo from "../views/endoscopia/agenda/config";
+import CalendarioEndo from "../views/endoscopia/agenda/calendario";
 
 // Crear una instancia de la clase
 // const authManager = new AuthManager();
@@ -65,7 +68,9 @@ const Routes = {
   "/imagen/agendas/configuracion": ConfigAgendaImagen,
   "/imagen/agendas/calendario": Calendario,
   "/endoscopia": Endo,
-  "/endoscopia/agendas": Endo,
+  "/endoscopia/agendas": AgendaEndo,
+  "/endoscopia/agendas/configuracion": ConfigAgEndo,
+  "/endoscopia/agendas/calendario": CalendarioEndo,
   "/salir": Salir,
   "/sing-out": SingOut,
 };
